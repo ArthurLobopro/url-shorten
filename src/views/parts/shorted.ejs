@@ -3,10 +3,15 @@
     <button id="copy">Copiar</button> 
     <script>
         const copy = document.getElementById('copy')
-        copy.onclick = () => {
-            const text = copy.value
+
+        const copyToClipboard = text => {
             navigator.clipboard.writeText(text)
             .then(() => alert("Copiado para área de transferência!"))
+        }
+
+        copy.onclick = () => {
+            const text = "<%= url%>"
+            copyToClipboard(text)
         }
     </script>
 </div>

@@ -9,7 +9,6 @@ server.use(express.static('public'))
 server.use(express.urlencoded({ extended: true }))
 
 server.get("/", async (req, res) => {
-    console.log(req);
     res.render('index', { number: await controllers.count(), part: 'form'})
 })
 server.get("/:id", controllers.getURL)

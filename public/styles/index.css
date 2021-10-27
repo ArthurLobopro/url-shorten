@@ -51,6 +51,11 @@ main {
     align-items: center;
 }
 
+main >form, main > div{
+    display: flex;
+    flex-direction: column;
+}
+
 input {
     width: 70vh;
     height: 4rem;
