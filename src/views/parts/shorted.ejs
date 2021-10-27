@@ -1,0 +1,12 @@
+<div>
+    <input type="text" disabled value="<%= url%>"> <br>
+    <button id="copy">Copiar</button> 
+    <script>
+        const copy = document.getElementById('copy')
+        copy.onclick = () => {
+            const text = copy.value
+            navigator.clipboard.writeText(text)
+            .then(() => alert("Copiado para área de transferência!"))
+        }
+    </script>
+</div>
