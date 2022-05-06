@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .",
     "dev": "nodemon . --dev",
-    "init-db": "node db/init.js && prisma migrate dev"
+    "init-db": "prisma migrate dev"
   },
   "keywords": [],
   "author": "Arthur Lobo",
