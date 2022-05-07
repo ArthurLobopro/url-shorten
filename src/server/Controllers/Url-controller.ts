@@ -1,11 +1,6 @@
-//@ts-check
-const { PrismaClient } = require('@prisma/client')
+import { PrismaClient } from "@prisma/client";
 
 const db = new PrismaClient()
-
-async function count() {
-    return await db.url.count()
-}
 
 const randint = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
@@ -27,8 +22,8 @@ function randomChar() {
     return randItem(type)
 }
 
-const URL = {
-    async generateRandomId() {
+export class URL {
+    static async generateRandomId() {
         const id = Array.from({ length: 6 }, randomChar).join('')
         const idExists = await db.url.count({
             where: {
@@ -37,15 +32,17 @@ const URL = {
         }) !== 0
 
         return !idExists ? id : await this.generateRandomId()
-    },
-    async verify(url) {
+    }
+
+    static async verify(url: string) {
         return await db.url.count({
             where: {
                 url
             }
         }) === 0
-    },
-    async create(url) {
+    }
+
+    static async create(url: string) {
         if (! await this.verify(url)) {
             const { id } = await db.url.findFirst({
                 select: {
@@ -66,9 +63,10 @@ const URL = {
         })
 
         return id
-    },
-    async getURL(id) {
-        const { url } = await db.url.findUnique({
+    }
+
+    static async getURL(id: string) {
+        const searchResult = await db.url.findUnique({
             select: {
                 url: true
             },
@@ -76,22 +74,16 @@ const URL = {
                 id
             }
         })
-        return url
+
+        if (searchResult.url) {
+            return searchResult.url
+        }
+
+        throw new Error('O id solicitado não existe')
+
+    }
+
+    static async count() {
+        return await db.url.count()
     }
 }
-
-const controllers = {
-    async create(req, res) {
-        const { url } = req.body
-        const id = await URL.create(url)
-        res.render('index', { number: await controllers.count(), part: 'shorted', url: `${req.headers.host}/${id}`})
-    },
-    count,
-    async getURL(req, res) {
-        const { id } = req.params
-        const url = await URL.getURL(id)
-        res.redirect(url)
-    }
-}
-
-module.exports = controllers
