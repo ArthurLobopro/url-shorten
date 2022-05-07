@@ -5,6 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "node .",
+    "build": "tsc",
     "dev": "nodemon . --dev",
     "init-db": "prisma migrate dev"
   },
