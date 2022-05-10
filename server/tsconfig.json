@@ -4,5 +4,6 @@
       "target": "es2020",
       "outDir": "./dist",
       "sourceMap": false,
+      "rootDir": "./"
   }
 }
