@@ -21,4 +21,9 @@ export class Controller {
             res.redirect('/')
         }
     }
+
+    static async list(req: Request, res: Response) {
+        const result = await db.url.findMany()
+        res.json(result)
+    }
 }
