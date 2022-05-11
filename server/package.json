@@ -2,11 +2,11 @@
   "name": "url-shorten",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "./dist/src/server/index.js",
   "scripts": {
     "start": "node .",
     "build": "tsc",
-    "dev": "nodemon . --dev",
+    "dev": "nodemon .",
     "init-db": "prisma migrate dev"
   },
   "keywords": [],
