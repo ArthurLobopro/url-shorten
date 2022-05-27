@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
+import "./App.css"
+import { AppRoutes } from "./Router";
 
 function App() {
-  const [state, setState] = useState([])
-
-  useEffect(() => {
-    fetch("https://api.github.com/users/arthurlobopro")
-    .then( res => res.json())
-    .then( res => setState(res))
-  })
-
-  return (
-    <div>{JSON.stringify(state)}</div>
-  );
+    return (
+        <AppRoutes/>
+    );
 }
 
 export default App;
