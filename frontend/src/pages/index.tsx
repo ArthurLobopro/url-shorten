@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./index.css"
 
 export function Index() {
+    const navigate = useNavigate()
+
     const [count, setCount] = useState(0)
     const [result, setResult] = useState(false) as [string | false, React.Dispatch<React.SetStateAction<string | false>>]
 
@@ -63,7 +67,7 @@ export function Index() {
                     &lt;/&gt; Encurtador de Links
                 </div>
                 <div>
-                    <span>Links encurtados: </span><span id="count">{count}</span>
+                    <span onClick={() => navigate("/list")}>Links encurtados: </span><span id="count">{count}</span>
                 </div>
             </header>
             <main>

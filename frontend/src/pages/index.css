@@ -1,0 +1,5 @@
+#root{
+    height: 100%;
+    display: grid !important;
+    grid-template-rows: max-content auto max-content;
+}

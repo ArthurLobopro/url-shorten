@@ -13,12 +13,6 @@ body {
     height: 100vh;
 }
 
-#root{
-    height: 100%;
-    display: grid !important;
-    grid-template-rows: max-content auto max-content;
-}
-
 body, main, .flex-column {
     display: flex;
     flex-direction: column;
