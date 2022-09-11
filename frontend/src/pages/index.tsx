@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../api";
 import "./index.css"
 
 export function Index() {
@@ -9,18 +10,18 @@ export function Index() {
     const [result, setResult] = useState(false) as [string | false, React.Dispatch<React.SetStateAction<string | false>>]
 
     useEffect(() => {
-        // eslint-disable-next-line no-restricted-globals
-        fetch(`${location.origin}/count`, { method: "GET" })
-            .then(res => res.json())
-            .then(res => setCount(res?.count))
+        api.get("/count")
+            .then(res => res.data)
+            .then(data => setCount(data.count))
+            .catch(err => console.log(err))
     })
 
     const Form = () => {
         return (
-            <form action="none">
+            <div>
                 <input type="text" name="url" placeholder="Cole seu link aqui..." /> <br />
                 <button type="button" onClick={onSubmit}>Encurtar</button>
-            </form>
+            </div>
         )
     }
 
@@ -29,7 +30,7 @@ export function Index() {
         const url = `${location.origin}/${result}`
         return (
             <div>
-                <input type="text" value={url}  disabled/> <br />
+                <input type="text" value={url} disabled /> <br />
                 <button type="button" onClick={() => navigator.clipboard.writeText(url)}>Copiar</button>
             </div>
         )
@@ -42,15 +43,8 @@ export function Index() {
             url: input.value
         }
 
-        fetch("/create", {
-            method: "POST",
-            body: JSON.stringify(body),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => res.json())
+        api.post("/create", body)
+            .then(res => res.data)
             .then(data => {
                 console.log(data);
                 if (data.count) {

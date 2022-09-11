@@ -1,6 +1,7 @@
 {
     "scripts": {
         "start:server": "cd server && yarn start",
-        "dev:server": "cd server && yarn dev"
+        "dev:server": "cd server && yarn dev",
+        "install": "cd server && yarn install && cd ../frontend && yarn install"
     }
 }
